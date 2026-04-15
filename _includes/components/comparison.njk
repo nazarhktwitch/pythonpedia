@@ -1,0 +1,24 @@
+<div class="comparison-table-wrapper">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        {% for item in items %}
+        <th>{{ item.name }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td class="comparison-feature">{{ row.feature }}</td>
+        {% for item in items %}
+        <td class="comparison-value {% if row.values[loop.index0].highlight %}{{ row.values[loop.index0].highlight }}{% endif %}">
+          {{ row.values[loop.index0].value }}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

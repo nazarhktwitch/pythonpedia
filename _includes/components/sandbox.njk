@@ -1,0 +1,6 @@
+<div class="sandbox-container" {% if code %}data-code="{{ code | escape }}"{% endif %}>
+  {% if title %}
+  <h3 class="sandbox-title">{{ title }}</h3>
+  {% endif %}
+  <div class="sandbox-loading">Loading sandbox...</div>
+</div>

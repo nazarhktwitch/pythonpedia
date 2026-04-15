@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{ language or 'en' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or site.description }}">
+  <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="{% if title %}{{ title }} | {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if title %}{{ title }} | {% endif %}{{ site.title }}">
+  <meta name="twitter:description" content="{{ description or site.description }}">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  {% if stylesheet %}<link rel="stylesheet" href="{{ stylesheet }}">{% endif %}
+</head>
+<body data-theme="light" data-language="{{ language or 'en' }}">
+  {% include "partials/sidebar.njk" %}
+  {% include "partials/header.njk" %}
+
+  <main id="main-content">
+    {{ content | safe }}
+  </main>
+  
+  {% include "partials/footer.njk" %}
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {{ synonyms | dump | safe }};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  {% if script %}<script src="{{ script }}" defer></script>{% endif %}
+</body>
+</html>

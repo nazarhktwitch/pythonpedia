@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Python asyncio: async/await, tasks, event loop, coroutines">
+  <title>asyncio Module — Async I/O | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="asyncio Module — Async I/O | Pythonpedia">
+  <meta property="og:description" content="Python asyncio: async/await, tasks, event loop, coroutines">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia//stdlib/asyncio/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="asyncio Module — Async I/O | Pythonpedia">
+  <meta name="twitter:description" content="Python asyncio: async/await, tasks, event loop, coroutines">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="en">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/" class="sidebar-link ">Home</a></li>
+      <li><a href="/compare/" class="sidebar-link ">Compare</a></li>
+      <li><a href="/practices/" class="sidebar-link ">Best Practices</a></li>
+      <li><a href="/standards/" class="sidebar-link ">Code Standards</a></li>
+      <li><a href="/sandbox/" class="sidebar-link ">Sandbox</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Standard Library</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>System & Files</strong>
+          <a href="/stdlib/os/">os</a>
+          <a href="/stdlib/sys/">sys</a>
+          <a href="/stdlib/subprocess/">subprocess</a>
+          <a href="/stdlib/pathlib/">pathlib</a>
+          <a href="/stdlib/shutil/">shutil</a>
+          <a href="/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Network & Web</strong>
+          <a href="/stdlib/requests/">requests (External)</a>
+          <a href="/stdlib/urllib/">urllib</a>
+          <a href="/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Data Formats</strong>
+          <a href="/stdlib/json/">json</a>
+          <a href="/stdlib/csv/">csv</a>
+          <a href="/stdlib/sqlite3/">sqlite3</a>
+          <a href="/stdlib/pickle/">pickle</a>
+          <a href="/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Math & Time</strong>
+          <a href="/stdlib/datetime/">datetime</a>
+          <a href="/stdlib/time/">time</a>
+          <a href="/stdlib/calendar/">calendar</a>
+          <a href="/stdlib/math/">math</a>
+          <a href="/stdlib/random/">random</a>
+          <a href="/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Structures & Logic</strong>
+          <a href="/stdlib/collections/">collections</a>
+          <a href="/stdlib/itertools/">itertools</a>
+          <a href="/stdlib/copy/">copy</a>
+          <a href="/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Security</strong>
+          <a href="/stdlib/hashlib/">hashlib</a>
+          <a href="/stdlib/secrets/">secrets</a>
+          <a href="/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Architecture & Debug</strong>
+          <a href="/stdlib/dataclasses/">dataclasses</a>
+          <a href="/stdlib/typing/">typing</a>
+          <a href="/stdlib/functools/">functools</a>
+          <a href="/stdlib/logging/">logging</a>
+          <a href="/stdlib/traceback/">traceback</a>
+          <a href="/stdlib/inspect/">inspect</a>
+          <a href="/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Concurrency</strong>
+          <a href="/stdlib/asyncio/">asyncio</a>
+          <a href="/stdlib/threading/">threading</a>
+          <a href="/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Text & Archives</strong>
+          <a href="/stdlib/re/">re</a>
+          <a href="/stdlib/string/">string</a>
+          <a href="/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Frameworks</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Python Versions</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/stdlib/" role="menuitem" aria-current="page">
+            Stdlib
+          </a>
+        </li>
+        <li role="none">
+          <a href="/frameworks/" role="menuitem" >
+            Frameworks
+          </a>
+        </li>
+        <li role="none">
+          <a href="/compare/" role="menuitem" >
+            Compare
+          </a>
+        </li>
+        <li role="none">
+          <a href="/versions/" role="menuitem" >
+            Versions
+          </a>
+        </li>
+        <li role="none">
+          <a href="/practices/" role="menuitem" >
+            Practices
+          </a>
+        </li>
+        <li role="none">
+          <a href="/sandbox/" role="menuitem" >
+            Sandbox
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link active" aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link " aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Search..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>asyncio — Asynchronous I/O</h1>
+<p>The <code>asyncio</code> module provides infrastructure for writing concurrent code using <code>async</code>/<code>await</code> syntax.</p>
+<pre><code class="language-python">import asyncio
+</code></pre>
+<h2>Basic async/await</h2>
+<pre><code class="language-python">import asyncio
+
+async def say_hello():
+    print(&quot;Hello&quot;)
+    await asyncio.sleep(1)  # Non-blocking sleep
+    print(&quot;World&quot;)
+
+asyncio.run(say_hello())
+</code></pre>
+<h2>Running Multiple Coroutines</h2>
+<pre><code class="language-python">import asyncio
+
+async def fetch_data(name, delay):
+    print(f&quot;Fetching {name}...&quot;)
+    await asyncio.sleep(delay)
+    return f&quot;{name} data&quot;
+
+async def main():
+    # Run concurrently
+    results = await asyncio.gather(
+        fetch_data(&quot;users&quot;, 2),
+        fetch_data(&quot;posts&quot;, 1),
+        fetch_data(&quot;comments&quot;, 3)
+    )
+    print(results)  # All three complete in ~3 seconds, not 6
+
+asyncio.run(main())
+</code></pre>
+<h2>Tasks</h2>
+<pre><code class="language-python">import asyncio
+
+async def background_task(name, interval):
+    while True:
+        print(f&quot;{name}: tick&quot;)
+        await asyncio.sleep(interval)
+
+async def main():
+    task1 = asyncio.create_task(background_task(&quot;A&quot;, 1))
+    task2 = asyncio.create_task(background_task(&quot;B&quot;, 2))
+    
+    await asyncio.sleep(5)  # Let tasks run for 5 seconds
+    
+    task1.cancel()
+    task2.cancel()
+
+asyncio.run(main())
+</code></pre>
+<h2>Timeouts</h2>
+<pre><code class="language-python">import asyncio
+
+async def slow_operation():
+    await asyncio.sleep(10)
+    return &quot;done&quot;
+
+async def main():
+    try:
+        result = await asyncio.wait_for(slow_operation(), timeout=3.0)
+    except asyncio.TimeoutError:
+        print(&quot;Operation timed out!&quot;)
+
+asyncio.run(main())
+</code></pre>
+<h2>Async Context Managers and Iterators</h2>
+<pre><code class="language-python">import asyncio
+
+# Async context manager
+class AsyncResource:
+    async def __aenter__(self):
+        print(&quot;Acquiring resource&quot;)
+        return self
+    
+    async def __aexit__(self, *args):
+        print(&quot;Releasing resource&quot;)
+
+async def main():
+    async with AsyncResource() as r:
+        print(&quot;Using resource&quot;)
+
+# Async iterator
+async def countdown(n):
+    while n &gt; 0:
+        yield n
+        await asyncio.sleep(0.5)
+        n -= 1
+
+async def main2():
+    async for num in countdown(5):
+        print(num)
+</code></pre>
+<h2>Synchronization</h2>
+<pre><code class="language-python">import asyncio
+
+lock = asyncio.Lock()
+semaphore = asyncio.Semaphore(3)  # Max 3 concurrent
+
+async def safe_operation(name):
+    async with lock:
+        print(f&quot;{name} has the lock&quot;)
+        await asyncio.sleep(1)
+
+async def limited_operation(name):
+    async with semaphore:
+        print(f&quot;{name} running (max 3 at a time)&quot;)
+        await asyncio.sleep(1)
+</code></pre>
+<h2>Common Pitfalls</h2>
+<ul>
+<li><strong>Don't call <code>asyncio.run()</code> inside async code</strong> — use <code>await</code> instead</li>
+<li><strong><code>await asyncio.sleep()</code> ≠ <code>time.sleep()</code></strong> — <code>time.sleep</code> blocks everything</li>
+<li><strong>CPU-bound work blocks the event loop</strong> — use <code>asyncio.to_thread()</code> (3.9+) or <code>ProcessPoolExecutor</code></li>
+<li><strong>All coroutines must be awaited</strong> — forgetting <code>await</code> returns a coroutine object, not the result</li>
+</ul>
+<h2>Official Documentation</h2>
+<p><a href="https://docs.python.org/3/library/asyncio.html">asyncio — Asynchronous I/O</a></p>
+<h2>API Reference</h2>
+<h3>Important Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>asyncio.run(coro)</code></td>
+<td>Execute the coroutine <code>coro</code> and return the result.</td>
+</tr>
+<tr>
+<td><code>asyncio.create_task(coro)</code></td>
+<td>Wrap the coroutine <code>coro</code> into a Task and schedule its execution.</td>
+</tr>
+<tr>
+<td><code>asyncio.sleep(delay)</code></td>
+<td>Block for <code>delay</code> seconds.</td>
+</tr>
+<tr>
+<td><code>asyncio.gather(*aws)</code></td>
+<td>Run awaitable objects in the <code>aws</code> sequence concurrently.</td>
+</tr>
+<tr>
+<td><code>asyncio.wait_for(aw, timeout)</code></td>
+<td>Wait for the awaitable <code>aw</code> to complete with a timeout.</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Complete Python documentation portal</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/stdlib/">Standard Library</a></li>
+        <li><a href="/frameworks/">Frameworks</a></li>
+        <li><a href="/sandbox/">Code Sandbox</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contribute</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/about/#contributing">Contribution Guide</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/about/#license">License</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>

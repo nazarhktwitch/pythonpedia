@@ -1,0 +1,36 @@
+{
+  "pythonVersions": [
+    "3.14",
+    "3.13",
+    "3.12",
+    "3.11",
+    "3.10",
+    "3.9",
+    "3.8",
+    "3.7",
+    "3.6"
+  ],
+  "defaultVersion": "3.11",
+  "versions": {
+    "3.14": {
+      "releaseDate": "2025-10-07",
+      "status": "latest",
+      "eol": null
+    },
+    "3.13": {
+      "releaseDate": "2024-10-07",
+      "status": "stable",
+      "eol": null
+    },
+    "3.12": {
+      "releaseDate": "2023-10-02",
+      "status": "stable",
+      "eol": null
+    },
+    "3.11": {
+      "releaseDate": "2022-10-24",
+      "status": "stable",
+      "eol": null
+    }
+  }
+}

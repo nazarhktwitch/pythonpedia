@@ -1,0 +1,72 @@
+<header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      {% set langPrefix = "" %}
+      {% if language == "ru" %}{% set langPrefix = "/ru" %}{% endif %}
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="{{ langPrefix }}/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">{{ site.title }}</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="{{ langPrefix }}/stdlib/" role="menuitem" {% if '/stdlib' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Библиотека{% else %}Stdlib{% endif %}
+          </a>
+        </li>
+        <li role="none">
+          <a href="{{ langPrefix }}/frameworks/" role="menuitem" {% if '/frameworks' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Фреймворки{% else %}Frameworks{% endif %}
+          </a>
+        </li>
+        <li role="none">
+          <a href="{{ langPrefix }}/compare/" role="menuitem" {% if '/compare' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Сравнение{% else %}Compare{% endif %}
+          </a>
+        </li>
+        <li role="none">
+          <a href="{{ langPrefix }}/versions/" role="menuitem" {% if '/versions' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Версии{% else %}Versions{% endif %}
+          </a>
+        </li>
+        <li role="none">
+          <a href="{{ langPrefix }}/practices/" role="menuitem" {% if '/practices' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Практики{% else %}Practices{% endif %}
+          </a>
+        </li>
+        <li role="none">
+          <a href="{{ langPrefix }}/sandbox/" role="menuitem" {% if '/sandbox' in page.url %}aria-current="page"{% endif %}>
+            {% if language == "ru" %}Песочница{% else %}Sandbox{% endif %}
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link {% if language != 'ru' %}active{% endif %}" aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link {% if language == 'ru' %}active{% endif %}" aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="{% if language == 'ru' %}Поиск...{% else %}Search...{% endif %}" aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

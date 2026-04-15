@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Документация requests: отправка GET/POST HTTP-запросов, заголовки, JSON">
+  <title>requests — HTTP для Людей | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="requests — HTTP для Людей | Pythonpedia">
+  <meta property="og:description" content="Документация requests: отправка GET/POST HTTP-запросов, заголовки, JSON">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia/ru/stdlib/requests/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="requests — HTTP для Людей | Pythonpedia">
+  <meta name="twitter:description" content="Документация requests: отправка GET/POST HTTP-запросов, заголовки, JSON">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="ru">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/ru/" class="sidebar-link ">Главная</a></li>
+      <li><a href="/ru/compare/" class="sidebar-link ">Сравнение</a></li>
+      <li><a href="/ru/practices/" class="sidebar-link ">Лучшие практики</a></li>
+      <li><a href="/ru/standards/" class="sidebar-link ">Стандарты кода</a></li>
+      <li><a href="/ru/sandbox/" class="sidebar-link ">Песочница</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Стандартная библиотека</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>Система и файлы</strong>
+          <a href="/ru/stdlib/os/">os</a>
+          <a href="/ru/stdlib/sys/">sys</a>
+          <a href="/ru/stdlib/subprocess/">subprocess</a>
+          <a href="/ru/stdlib/pathlib/">pathlib</a>
+          <a href="/ru/stdlib/shutil/">shutil</a>
+          <a href="/ru/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Сеть и Web</strong>
+          <a href="/ru/stdlib/requests/">requests (External)</a>
+          <a href="/ru/stdlib/urllib/">urllib</a>
+          <a href="/ru/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Данные и форматы</strong>
+          <a href="/ru/stdlib/json/">json</a>
+          <a href="/ru/stdlib/csv/">csv</a>
+          <a href="/ru/stdlib/sqlite3/">sqlite3</a>
+          <a href="/ru/stdlib/pickle/">pickle</a>
+          <a href="/ru/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Математика и время</strong>
+          <a href="/ru/stdlib/datetime/">datetime</a>
+          <a href="/ru/stdlib/time/">time</a>
+          <a href="/ru/stdlib/calendar/">calendar</a>
+          <a href="/ru/stdlib/math/">math</a>
+          <a href="/ru/stdlib/random/">random</a>
+          <a href="/ru/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Структуры и алгоритмы</strong>
+          <a href="/ru/stdlib/collections/">collections</a>
+          <a href="/ru/stdlib/itertools/">itertools</a>
+          <a href="/ru/stdlib/copy/">copy</a>
+          <a href="/ru/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Безопасность</strong>
+          <a href="/ru/stdlib/hashlib/">hashlib</a>
+          <a href="/ru/stdlib/secrets/">secrets</a>
+          <a href="/ru/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Архитектура и Дебаг</strong>
+          <a href="/ru/stdlib/dataclasses/">dataclasses</a>
+          <a href="/ru/stdlib/typing/">typing</a>
+          <a href="/ru/stdlib/functools/">functools</a>
+          <a href="/ru/stdlib/logging/">logging</a>
+          <a href="/ru/stdlib/traceback/">traceback</a>
+          <a href="/ru/stdlib/inspect/">inspect</a>
+          <a href="/ru/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Конкурентность</strong>
+          <a href="/ru/stdlib/asyncio/">asyncio</a>
+          <a href="/ru/stdlib/threading/">threading</a>
+          <a href="/ru/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Текст и архивы</strong>
+          <a href="/ru/stdlib/re/">re</a>
+          <a href="/ru/stdlib/string/">string</a>
+          <a href="/ru/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Фреймворки</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/ru/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/ru/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/ru/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/ru/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/ru/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/ru/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/ru/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/ru/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/ru/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Версии Python</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/ru/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/ru/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/ru/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/ru/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/ru/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/ru/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/ru/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/ru/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/ru/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/ru/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/ru/stdlib/" role="menuitem" aria-current="page">
+            Библиотека
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/frameworks/" role="menuitem" >
+            Фреймворки
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/compare/" role="menuitem" >
+            Сравнение
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/versions/" role="menuitem" >
+            Версии
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/practices/" role="menuitem" >
+            Практики
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/sandbox/" role="menuitem" >
+            Песочница
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link " aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link active" aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Поиск..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>requests — HTTP для Людей™</h1>
+<p>Хотя в Python есть встроенный <code>urllib</code>, именно пакет <strong><code>requests</code></strong> считается мировым де-факто стандартом для сетевых HTTP-запросов в языке. Это сторонняя библиотека, но без неё не обходится ни один серьезный проект, поэтому её часто включают в шпаргалки наравне со стандартными модулями.</p>
+<p><em>Внимание: Это сторонняя библиотека. Установите её: <code>pip install requests</code>.</em></p>
+<pre><code class="language-python">import requests
+</code></pre>
+<h2>Простой GET-запрос</h2>
+<p>Отправка запросов через <code>requests</code> невероятно проста. Смотрите, как легко достать готовый словарь, ответственный за разбор JSON (даже не нужно импортировать модуль <code>json</code>):</p>
+<pre><code class="language-python">import requests
+
+# Делаем простой запрос GET
+response = requests.get('https://api.github.com/events')
+
+# Проверка статус-кода (200 - Ок, 404 - Не найдено)
+print(response.status_code)
+
+# Получение текстового содержимого (HTML-код или ответ сервера)
+print(response.text)
+
+# Встроенный парсинг JSON ответа!
+data = response.json()
+print(data[0]['id'])
+</code></pre>
+<h2>Отправка данных (POST-запрос)</h2>
+<p>Отправка форм, загрузка файлов и передача JSON происходят магически без ручной настройки заголовков!</p>
+<pre><code class="language-python">import requests
+
+url = 'https://httpbin.org/post'
+payload = {'username': 'bob', 'password': '123'}
+
+# 1. Отправить как обычную форму браузере (x-www-form-urlencoded):
+r1 = requests.post(url, data=payload)
+
+# 2. Отправить как чистый JSON-объект!
+# Библиотека САМА поставит заголовок 'Content-Type: application/json'
+r2 = requests.post(url, json=payload)
+</code></pre>
+<h2>Параметры и заголовки</h2>
+<p>Безопасное добавление параметров к URL-адресу (строит ссылку за вас) и авторизация:</p>
+<pre><code class="language-python">import requests
+
+url = 'https://api.example.com/search'
+query_params = {'limit': 10, 'search': 'python requests'}
+headers = {'Authorization': 'Bearer ВАШ_ТОКЕН'}
+
+# Важно: всегда используйте `timeout`, иначе скрипт может зависнуть навечно,
+# если сервер просто перестанет отвечать!
+response = requests.get(
+    url, 
+    params=query_params, 
+    headers=headers,
+    timeout=5 
+)
+</code></pre>
+<hr>
+<h2>Полный справочник API (API Reference)</h2>
+<h3>Базовые функции запросов</h3>
+<p>Каждая из этих функций возвращает объект результата <code>Response</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>requests.get(url, params=None, **kwargs)</code></td>
+<td>Отправляет запрос GET. В <code>params</code> можно передать словарь url-переменных запроса.</td>
+</tr>
+<tr>
+<td><code>requests.post(url, data=None, json=None)</code></td>
+<td>Отправляет POST. Аргумент <code>data</code> используется для форм и файлов. Аргумент <code>json</code> для прямой отправки JSON-структур.</td>
+</tr>
+<tr>
+<td><code>requests.put(url, data=None)</code></td>
+<td>Отправляет запрос PUT для изменения ресурса.</td>
+</tr>
+<tr>
+<td><code>requests.delete(url)</code></td>
+<td>Отправляет запрос DELETE.</td>
+</tr>
+</tbody>
+</table>
+<h3>Важные параметры запроса (<code>**kwargs</code>)</h3>
+<p>Могут быть переданы в любую функцию (get, post...).</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>headers=dict</code></td>
+<td>Словарь с кастомными HTTP-заголовками пользователя.</td>
+</tr>
+<tr>
+<td><code>cookies=dict</code></td>
+<td>Словарь для отправки готовых &quot;куки&quot;-файлов.</td>
+</tr>
+<tr>
+<td><code>auth=(user, pwd)</code></td>
+<td>Кортеж логин-пароль для простой Basic/Digest авторизации.</td>
+</tr>
+<tr>
+<td><code>timeout=int</code></td>
+<td>Сколько секунд скрипт должен ЖДАТЬ ответа на запрос (выдает Timeout Exception).</td>
+</tr>
+</tbody>
+</table>
+<h3>Свойства объекта Response (Ответ)</h3>
+<table>
+<thead>
+<tr>
+<th>Свойство / Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>response.text</code></td>
+<td>Строка <code>str</code> (Юникод) с текстовым телом ответа сервера.</td>
+</tr>
+<tr>
+<td><code>response.content</code></td>
+<td>Сырая строка байт <code>bytes</code> тела ответа (Используйте для скачивания картинок, zip-файлов).</td>
+</tr>
+<tr>
+<td><code>response.json()</code></td>
+<td>Метод, автоматически декодирующий ответ в Python-словарь или список.</td>
+</tr>
+<tr>
+<td><code>response.status_code</code></td>
+<td>Число <code>int</code> HTTP кода возврата (например 200).</td>
+</tr>
+<tr>
+<td><code>response.ok</code></td>
+<td>Булево свойство. Истинно, если <code>status_code</code> &lt; 400.</td>
+</tr>
+<tr>
+<td><code>response.headers</code></td>
+<td>Нечувствительный к регистру букв словарь всех заголовков, присланных сервером в ответ на наш запрос.</td>
+</tr>
+<tr>
+<td><code>response.raise_for_status()</code></td>
+<td>Вызывает исключение (краш ошибки <code>HTTPError</code>), если сервер ответил статусом 4xx или 5xx. Очень удобно, чтобы стопнуть код при неудаче.</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Полный портал документации Python</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ресурсы</h4>
+      <ul>
+        <li><a href="/ru/about/">О проекте</a></li>
+        <li><a href="/ru/stdlib/">Стандартная библиотека</a></li>
+        <li><a href="/ru/frameworks/">Фреймворки</a></li>
+        <li><a href="/ru/sandbox/">Песочница</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Участие</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/ru/about/#contributing">Руководство</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Правовая информация</h4>
+      <ul>
+        <li><a href="/ru/about/#license">Лицензия</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>

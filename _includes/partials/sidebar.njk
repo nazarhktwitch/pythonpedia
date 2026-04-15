@@ -1,0 +1,144 @@
+<div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="{{ langPrefix }}/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">{{ site.title }}</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    {% set langPrefix = "" %}
+    {% if language == "ru" %}{% set langPrefix = "/ru" %}{% endif %}
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="{{ langPrefix }}/" class="sidebar-link {% if page.url == langPrefix ~ '/' %}active{% endif %}">{% if language == 'ru' %}Главная{% else %}Home{% endif %}</a></li>
+      <li><a href="{{ langPrefix }}/compare/" class="sidebar-link {% if '/compare' in page.url %}active{% endif %}">{% if language == 'ru' %}Сравнение{% else %}Compare{% endif %}</a></li>
+      <li><a href="{{ langPrefix }}/practices/" class="sidebar-link {% if '/practices' in page.url %}active{% endif %}">{% if language == 'ru' %}Лучшие практики{% else %}Best Practices{% endif %}</a></li>
+      <li><a href="{{ langPrefix }}/standards/" class="sidebar-link {% if '/standards' in page.url %}active{% endif %}">{% if language == 'ru' %}Стандарты кода{% else %}Code Standards{% endif %}</a></li>
+      <li><a href="{{ langPrefix }}/sandbox/" class="sidebar-link {% if '/sandbox' in page.url %}active{% endif %}">{% if language == 'ru' %}Песочница{% else %}Sandbox{% endif %}</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>{% if language == 'ru' %}Стандартная библиотека{% else %}Standard Library{% endif %}</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Система и файлы{% else %}System & Files{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/os/">os</a>
+          <a href="{{ langPrefix }}/stdlib/sys/">sys</a>
+          <a href="{{ langPrefix }}/stdlib/subprocess/">subprocess</a>
+          <a href="{{ langPrefix }}/stdlib/pathlib/">pathlib</a>
+          <a href="{{ langPrefix }}/stdlib/shutil/">shutil</a>
+          <a href="{{ langPrefix }}/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Сеть и Web{% else %}Network & Web{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/requests/">requests (External)</a>
+          <a href="{{ langPrefix }}/stdlib/urllib/">urllib</a>
+          <a href="{{ langPrefix }}/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Данные и форматы{% else %}Data Formats{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/json/">json</a>
+          <a href="{{ langPrefix }}/stdlib/csv/">csv</a>
+          <a href="{{ langPrefix }}/stdlib/sqlite3/">sqlite3</a>
+          <a href="{{ langPrefix }}/stdlib/pickle/">pickle</a>
+          <a href="{{ langPrefix }}/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Математика и время{% else %}Math & Time{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/datetime/">datetime</a>
+          <a href="{{ langPrefix }}/stdlib/time/">time</a>
+          <a href="{{ langPrefix }}/stdlib/calendar/">calendar</a>
+          <a href="{{ langPrefix }}/stdlib/math/">math</a>
+          <a href="{{ langPrefix }}/stdlib/random/">random</a>
+          <a href="{{ langPrefix }}/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Структуры и алгоритмы{% else %}Structures & Logic{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/collections/">collections</a>
+          <a href="{{ langPrefix }}/stdlib/itertools/">itertools</a>
+          <a href="{{ langPrefix }}/stdlib/copy/">copy</a>
+          <a href="{{ langPrefix }}/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Безопасность{% else %}Security{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/hashlib/">hashlib</a>
+          <a href="{{ langPrefix }}/stdlib/secrets/">secrets</a>
+          <a href="{{ langPrefix }}/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Архитектура и Дебаг{% else %}Architecture & Debug{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/dataclasses/">dataclasses</a>
+          <a href="{{ langPrefix }}/stdlib/typing/">typing</a>
+          <a href="{{ langPrefix }}/stdlib/functools/">functools</a>
+          <a href="{{ langPrefix }}/stdlib/logging/">logging</a>
+          <a href="{{ langPrefix }}/stdlib/traceback/">traceback</a>
+          <a href="{{ langPrefix }}/stdlib/inspect/">inspect</a>
+          <a href="{{ langPrefix }}/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Конкурентность{% else %}Concurrency{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/asyncio/">asyncio</a>
+          <a href="{{ langPrefix }}/stdlib/threading/">threading</a>
+          <a href="{{ langPrefix }}/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>{% if language == 'ru' %}Текст и архивы{% else %}Text & Archives{% endif %}</strong>
+          <a href="{{ langPrefix }}/stdlib/re/">re</a>
+          <a href="{{ langPrefix }}/stdlib/string/">string</a>
+          <a href="{{ langPrefix }}/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>{% if language == 'ru' %}Фреймворки{% else %}Frameworks{% endif %}</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="{{ langPrefix }}/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="{{ langPrefix }}/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="{{ langPrefix }}/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="{{ langPrefix }}/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="{{ langPrefix }}/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="{{ langPrefix }}/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="{{ langPrefix }}/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="{{ langPrefix }}/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="{{ langPrefix }}/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="{{ langPrefix }}/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>{% if language == 'ru' %}Версии Python{% else %}Python Versions{% endif %}</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="{{ langPrefix }}/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="{{ langPrefix }}/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="{{ langPrefix }}/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="{{ langPrefix }}/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="{{ langPrefix }}/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="{{ langPrefix }}/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="{{ langPrefix }}/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="{{ langPrefix }}/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="{{ langPrefix }}/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="{{ langPrefix }}/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,46 @@
+<article class="card" data-category="{{ category }}">
+  <header class="card-header">
+    <h3 class="card-title">
+      <a href="{{ url }}">{{ title }}</a>
+    </h3>
+    {% if python_version_introduced %}
+    <span class="version-badge" title="Introduced in Python {{ python_version_introduced }}">
+      Python {{ python_version_introduced }}+
+    </span>
+    {% endif %}
+    {% if python_version_deprecated %}
+    <span class="version-badge deprecated" title="Deprecated in Python {{ python_version_deprecated }}">
+      Deprecated
+    </span>
+    {% endif %}
+  </header>
+
+  {% if signature %}
+  <div class="card-signature">
+    <code>{{ signature }}</code>
+  </div>
+  {% endif %}
+
+  <div class="card-body">
+    <p class="card-description">{{ description }}</p>
+
+    {% if tags %}
+    <div class="card-tags">
+      {% for tag in tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <footer class="card-footer">
+    {% if url %}
+    <a href="{{ url }}" class="card-link">Read more →</a>
+    {% endif %}
+    {% if example_code %}
+    <button class="card-sandbox-btn" data-code="{{ example_code | escape }}" aria-label="Run in sandbox">
+      Try it
+    </button>
+    {% endif %}
+  </footer>
+</article>

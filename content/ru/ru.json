@@ -1,0 +1,4 @@
+{
+  "language": "ru",
+  "permalink": "/ru/{{ page.filePathStem | replace('content/ru/', '') | replace('/index', '/') }}{% if not page.filePathStem.endsWith('/index') %}/{% endif %}"
+}

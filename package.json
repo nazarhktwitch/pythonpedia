@@ -1,0 +1,24 @@
+{
+  "name": "pythonpedia",
+  "version": "1.0.0",
+  "description": "Universal portal with complete Python documentation",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "dev": "eleventy --serve --watch"
+  },
+  "keywords": [
+    "python",
+    "documentation",
+    "static-site"
+  ],
+  "author": "NazarHK",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  },
+  "dependencies": {
+    "lunr": "^2.3.9",
+    "prismjs": "^1.30.0"
+  }
+}

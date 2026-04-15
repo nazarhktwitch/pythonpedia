@@ -1,0 +1,16 @@
+{
+  "append": ["add", "insert"],
+  "list": ["array"],
+  "dictionary": ["dict", "map"],
+  "function": ["method", "procedure"],
+  "class": ["type"],
+  "module": ["package", "library"],
+  "import": ["include", "require"],
+  "string": ["text", "str"],
+  "integer": ["int", "number"],
+  "boolean": ["bool"],
+  "exception": ["error"],
+  "raise": ["throw"],
+  "try": ["catch"],
+  "finally": ["ensure"]
+}

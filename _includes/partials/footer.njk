@@ -1,0 +1,40 @@
+<footer role="contentinfo">
+  {% set langPrefix = "" %}
+  {% if language == "ru" %}{% set langPrefix = "/ru" %}{% endif %}
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>{% if language == "ru" %}Полный портал документации Python{% else %}Complete Python documentation portal{% endif %}</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>{% if language == "ru" %}Ресурсы{% else %}Resources{% endif %}</h4>
+      <ul>
+        <li><a href="{{ langPrefix }}/about/">{% if language == "ru" %}О проекте{% else %}About{% endif %}</a></li>
+        <li><a href="{{ langPrefix }}/stdlib/">{% if language == "ru" %}Стандартная библиотека{% else %}Standard Library{% endif %}</a></li>
+        <li><a href="{{ langPrefix }}/frameworks/">{% if language == "ru" %}Фреймворки{% else %}Frameworks{% endif %}</a></li>
+        <li><a href="{{ langPrefix }}/sandbox/">{% if language == "ru" %}Песочница{% else %}Code Sandbox{% endif %}</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>{% if language == "ru" %}Участие{% else %}Contribute{% endif %}</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="{{ langPrefix }}/about/#contributing">{% if language == "ru" %}Руководство{% else %}Contribution Guide{% endif %}</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>{% if language == "ru" %}Правовая информация{% else %}Legal{% endif %}</h4>
+      <ul>
+        <li><a href="{{ langPrefix }}/about/#license">{% if language == "ru" %}Лицензия{% else %}License{% endif %}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 {{ site.author }}. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>

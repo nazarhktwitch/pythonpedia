@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Документация multiprocessing: обход GIL, создание процессов, пулы">
+  <title>Модуль multiprocessing — Процессы | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Модуль multiprocessing — Процессы | Pythonpedia">
+  <meta property="og:description" content="Документация multiprocessing: обход GIL, создание процессов, пулы">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia/ru/stdlib/multiprocessing/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Модуль multiprocessing — Процессы | Pythonpedia">
+  <meta name="twitter:description" content="Документация multiprocessing: обход GIL, создание процессов, пулы">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="ru">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/ru/" class="sidebar-link ">Главная</a></li>
+      <li><a href="/ru/compare/" class="sidebar-link ">Сравнение</a></li>
+      <li><a href="/ru/practices/" class="sidebar-link ">Лучшие практики</a></li>
+      <li><a href="/ru/standards/" class="sidebar-link ">Стандарты кода</a></li>
+      <li><a href="/ru/sandbox/" class="sidebar-link ">Песочница</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Стандартная библиотека</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>Система и файлы</strong>
+          <a href="/ru/stdlib/os/">os</a>
+          <a href="/ru/stdlib/sys/">sys</a>
+          <a href="/ru/stdlib/subprocess/">subprocess</a>
+          <a href="/ru/stdlib/pathlib/">pathlib</a>
+          <a href="/ru/stdlib/shutil/">shutil</a>
+          <a href="/ru/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Сеть и Web</strong>
+          <a href="/ru/stdlib/requests/">requests (External)</a>
+          <a href="/ru/stdlib/urllib/">urllib</a>
+          <a href="/ru/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Данные и форматы</strong>
+          <a href="/ru/stdlib/json/">json</a>
+          <a href="/ru/stdlib/csv/">csv</a>
+          <a href="/ru/stdlib/sqlite3/">sqlite3</a>
+          <a href="/ru/stdlib/pickle/">pickle</a>
+          <a href="/ru/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Математика и время</strong>
+          <a href="/ru/stdlib/datetime/">datetime</a>
+          <a href="/ru/stdlib/time/">time</a>
+          <a href="/ru/stdlib/calendar/">calendar</a>
+          <a href="/ru/stdlib/math/">math</a>
+          <a href="/ru/stdlib/random/">random</a>
+          <a href="/ru/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Структуры и алгоритмы</strong>
+          <a href="/ru/stdlib/collections/">collections</a>
+          <a href="/ru/stdlib/itertools/">itertools</a>
+          <a href="/ru/stdlib/copy/">copy</a>
+          <a href="/ru/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Безопасность</strong>
+          <a href="/ru/stdlib/hashlib/">hashlib</a>
+          <a href="/ru/stdlib/secrets/">secrets</a>
+          <a href="/ru/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Архитектура и Дебаг</strong>
+          <a href="/ru/stdlib/dataclasses/">dataclasses</a>
+          <a href="/ru/stdlib/typing/">typing</a>
+          <a href="/ru/stdlib/functools/">functools</a>
+          <a href="/ru/stdlib/logging/">logging</a>
+          <a href="/ru/stdlib/traceback/">traceback</a>
+          <a href="/ru/stdlib/inspect/">inspect</a>
+          <a href="/ru/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Конкурентность</strong>
+          <a href="/ru/stdlib/asyncio/">asyncio</a>
+          <a href="/ru/stdlib/threading/">threading</a>
+          <a href="/ru/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Текст и архивы</strong>
+          <a href="/ru/stdlib/re/">re</a>
+          <a href="/ru/stdlib/string/">string</a>
+          <a href="/ru/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Фреймворки</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/ru/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/ru/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/ru/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/ru/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/ru/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/ru/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/ru/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/ru/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/ru/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Версии Python</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/ru/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/ru/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/ru/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/ru/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/ru/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/ru/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/ru/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/ru/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/ru/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/ru/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/ru/stdlib/" role="menuitem" aria-current="page">
+            Библиотека
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/frameworks/" role="menuitem" >
+            Фреймворки
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/compare/" role="menuitem" >
+            Сравнение
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/versions/" role="menuitem" >
+            Версии
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/practices/" role="menuitem" >
+            Практики
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/sandbox/" role="menuitem" >
+            Песочница
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link " aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link active" aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Поиск..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>multiprocessing — Многопроцессность</h1>
+<p>Модуль <code>multiprocessing</code> позволяет создавать параллельные программы, обходящие глобальную блокировку интерпретатора (GIL) за счёт использования процессов вместо потоков. Идеально для тяжелых вычислений на CPU.</p>
+<pre><code class="language-python">import multiprocessing
+</code></pre>
+<h2>Базовый процесс</h2>
+<p>На Windows код создания процессов должен быть внутри блока <code>if __name__ == '__main__':</code>.</p>
+<pre><code class="language-python">import multiprocessing
+import time
+
+def cpu_heavy_task(name):
+    print(f&quot;Процесс {name} начался&quot;)
+    # Эмуляция вычислений
+    time.sleep(2)
+    print(f&quot;Процесс {name} завершен&quot;)
+
+if __name__ == '__main__':
+    p = multiprocessing.Process(target=cpu_heavy_task, args=(&quot;A&quot;,))
+    
+    p.start() # Запуск в отдельном процессе
+    p.join()  # Ожидание завершения
+</code></pre>
+<h2>Пул процессов (Рекомендуется)</h2>
+<p>Для распределения функции по массиву данных на всех ядрах процессора:</p>
+<pre><code class="language-python">import multiprocessing
+import time
+
+def process_number(n):
+    time.sleep(1)
+    return n * n
+
+if __name__ == '__main__':
+    data = [1, 2, 3, 4, 5, 6, 7, 8]
+    
+    # Pool автоматически создает по 1 процессу на каждое ядро
+    with multiprocessing.Pool() as pool:
+        # Метод map блокирует выполнение до получения всех результатов
+        results = pool.map(process_number, data)
+        
+    print(results)  # [1, 4, 9, 16, 25, 36, 49, 64]
+</code></pre>
+<h2>Обмен данными (Очереди)</h2>
+<p>Поскольку процессы имеют независимую память (в отличие от потоков), глобальные переменные не будут общими. Нужно использовать <code>Queue</code>.</p>
+<pre><code class="language-python">import multiprocessing
+
+def worker(q):
+    # Добавляем данные в общую очередь
+    q.put(&quot;Данные из дочернего процесса&quot;)
+
+if __name__ == '__main__':
+    q = multiprocessing.Queue()
+    p = multiprocessing.Process(target=worker, args=(q,))
+    p.start()
+    
+    print(q.get()) # Читаем данные из главного процесса
+    p.join()
+</code></pre>
+<h2>Частые ошибки</h2>
+<ul>
+<li><strong>Отсутствие <code>if __name__ == '__main__':</code></strong> — приведет к бесконечному циклу создания процессов на Windows.</li>
+<li><strong>Обмен объектами</strong> — данные, передаваемые в другие процессы, сериализуются через pickle. Не всё можно передать (например, открытые файлы).</li>
+<li><strong>Слишком много маленьких задач</strong> — создание процесса стоит дорого (ЦПУ/Память). Если задача выполняется за 0.001 секунды, мультипроцессность её замедлит.</li>
+</ul>
+<h2>Официальная документация</h2>
+<p><a href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing — Process-based parallelism</a></p>
+<h2>Полный справочник API (API Reference)</h2>
+<h3>Классы Process и Pool</h3>
+<table>
+<thead>
+<tr>
+<th>Класс</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>multiprocessing.Process</code></td>
+<td>Представляет процесс ОС (принимает <code>target</code>-функцию и её <code>args</code>). Его нужно запускать <code>.start()</code>.</td>
+</tr>
+<tr>
+<td><code>multiprocessing.Pool</code></td>
+<td>Класс-менеджер пула из нескольких процессов для массового распределения задач.</td>
+</tr>
+</tbody>
+</table>
+<h3>Методы пула (Pool)</h3>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Pool.map(func, iterable)</code></td>
+<td>Эквивалент обычной проверки <code>map</code>, работает кусками по массиву. Полностью блокирует основной код, пока не вычислит весь массив!</td>
+</tr>
+<tr>
+<td><code>Pool.apply_async(func, args)</code></td>
+<td>Асинхронно кидает 1 задачу в пул. Не блокирует код операцией ожидания вычисления процессом.</td>
+</tr>
+<tr>
+<td><code>Pool.close()</code></td>
+<td>Запрещает добавлять пулу новые задачи.</td>
+</tr>
+<tr>
+<td><code>Pool.join()</code></td>
+<td>Режим &quot;Ожидания&quot;. Замораживает скрипт на этой строке, пока процессы в пуле работают. Вызывается только после <code>close()</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>IPC (межпроцессное взаимодействие)</h3>
+<table>
+<thead>
+<tr>
+<th>Класс</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>multiprocessing.Queue</code></td>
+<td>Потокобезопасная очередь для передачи сообщений и данных между процессами. (Добавлять <code>q.put()</code>, читать <code>q.get()</code>).</td>
+</tr>
+<tr>
+<td><code>multiprocessing.Pipe</code></td>
+<td>Двусторонний канал. Возвращает кортеж из двух объектов Connection.</td>
+</tr>
+<tr>
+<td><code>multiprocessing.Lock</code></td>
+<td>Блокировка (мьютекс) ОС-уровня.</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Полный портал документации Python</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ресурсы</h4>
+      <ul>
+        <li><a href="/ru/about/">О проекте</a></li>
+        <li><a href="/ru/stdlib/">Стандартная библиотека</a></li>
+        <li><a href="/ru/frameworks/">Фреймворки</a></li>
+        <li><a href="/ru/sandbox/">Песочница</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Участие</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/ru/about/#contributing">Руководство</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Правовая информация</h4>
+      <ul>
+        <li><a href="/ru/about/#license">Лицензия</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>

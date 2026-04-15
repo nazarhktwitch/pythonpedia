@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Python datetime module: date, time, timedelta, formatting and parsing">
+  <title>datetime Module — Dates and Times | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="datetime Module — Dates and Times | Pythonpedia">
+  <meta property="og:description" content="Python datetime module: date, time, timedelta, formatting and parsing">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia//stdlib/datetime/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="datetime Module — Dates and Times | Pythonpedia">
+  <meta name="twitter:description" content="Python datetime module: date, time, timedelta, formatting and parsing">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="en">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/" class="sidebar-link ">Home</a></li>
+      <li><a href="/compare/" class="sidebar-link ">Compare</a></li>
+      <li><a href="/practices/" class="sidebar-link ">Best Practices</a></li>
+      <li><a href="/standards/" class="sidebar-link ">Code Standards</a></li>
+      <li><a href="/sandbox/" class="sidebar-link ">Sandbox</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Standard Library</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>System & Files</strong>
+          <a href="/stdlib/os/">os</a>
+          <a href="/stdlib/sys/">sys</a>
+          <a href="/stdlib/subprocess/">subprocess</a>
+          <a href="/stdlib/pathlib/">pathlib</a>
+          <a href="/stdlib/shutil/">shutil</a>
+          <a href="/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Network & Web</strong>
+          <a href="/stdlib/requests/">requests (External)</a>
+          <a href="/stdlib/urllib/">urllib</a>
+          <a href="/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Data Formats</strong>
+          <a href="/stdlib/json/">json</a>
+          <a href="/stdlib/csv/">csv</a>
+          <a href="/stdlib/sqlite3/">sqlite3</a>
+          <a href="/stdlib/pickle/">pickle</a>
+          <a href="/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Math & Time</strong>
+          <a href="/stdlib/datetime/">datetime</a>
+          <a href="/stdlib/time/">time</a>
+          <a href="/stdlib/calendar/">calendar</a>
+          <a href="/stdlib/math/">math</a>
+          <a href="/stdlib/random/">random</a>
+          <a href="/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Structures & Logic</strong>
+          <a href="/stdlib/collections/">collections</a>
+          <a href="/stdlib/itertools/">itertools</a>
+          <a href="/stdlib/copy/">copy</a>
+          <a href="/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Security</strong>
+          <a href="/stdlib/hashlib/">hashlib</a>
+          <a href="/stdlib/secrets/">secrets</a>
+          <a href="/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Architecture & Debug</strong>
+          <a href="/stdlib/dataclasses/">dataclasses</a>
+          <a href="/stdlib/typing/">typing</a>
+          <a href="/stdlib/functools/">functools</a>
+          <a href="/stdlib/logging/">logging</a>
+          <a href="/stdlib/traceback/">traceback</a>
+          <a href="/stdlib/inspect/">inspect</a>
+          <a href="/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Concurrency</strong>
+          <a href="/stdlib/asyncio/">asyncio</a>
+          <a href="/stdlib/threading/">threading</a>
+          <a href="/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Text & Archives</strong>
+          <a href="/stdlib/re/">re</a>
+          <a href="/stdlib/string/">string</a>
+          <a href="/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Frameworks</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Python Versions</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/stdlib/" role="menuitem" aria-current="page">
+            Stdlib
+          </a>
+        </li>
+        <li role="none">
+          <a href="/frameworks/" role="menuitem" >
+            Frameworks
+          </a>
+        </li>
+        <li role="none">
+          <a href="/compare/" role="menuitem" >
+            Compare
+          </a>
+        </li>
+        <li role="none">
+          <a href="/versions/" role="menuitem" >
+            Versions
+          </a>
+        </li>
+        <li role="none">
+          <a href="/practices/" role="menuitem" >
+            Practices
+          </a>
+        </li>
+        <li role="none">
+          <a href="/sandbox/" role="menuitem" >
+            Sandbox
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link active" aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link " aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Search..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>datetime — Date and Time</h1>
+<p>The <code>datetime</code> module provides classes for working with dates, times, and time intervals.</p>
+<pre><code class="language-python">from datetime import datetime, date, time, timedelta
+</code></pre>
+<h2>Current Date and Time</h2>
+<pre><code class="language-python">from datetime import datetime, date
+
+now = datetime.now()
+print(now)  # 2024-01-15 10:30:45.123456
+
+today = date.today()
+print(today)  # 2024-01-15
+
+# UTC time
+utc_now = datetime.utcnow()
+</code></pre>
+<h2>Creating Date/Time Objects</h2>
+<pre><code class="language-python">from datetime import datetime, date, time
+
+# Specific date
+d = date(2024, 1, 15)
+
+# Specific time
+t = time(10, 30, 45)
+
+# Specific datetime
+dt = datetime(2024, 1, 15, 10, 30, 45)
+
+# Access components
+print(dt.year)    # 2024
+print(dt.month)   # 1
+print(dt.day)     # 15
+print(dt.hour)    # 10
+print(dt.minute)  # 30
+print(dt.second)  # 45
+print(dt.weekday())  # 0 (Monday) - 6 (Sunday)
+</code></pre>
+<h2>Formatting (datetime → string)</h2>
+<pre><code class="language-python">from datetime import datetime
+
+now = datetime.now()
+
+# strftime — format to string
+print(now.strftime(&quot;%Y-%m-%d&quot;))          # 2024-01-15
+print(now.strftime(&quot;%d/%m/%Y %H:%M&quot;))   # 15/01/2024 10:30
+print(now.strftime(&quot;%B %d, %Y&quot;))         # January 15, 2024
+print(now.strftime(&quot;%I:%M %p&quot;))          # 10:30 AM
+
+# ISO format
+print(now.isoformat())  # 2024-01-15T10:30:45.123456
+</code></pre>
+<h2>Parsing (string → datetime)</h2>
+<pre><code class="language-python">from datetime import datetime
+
+# strptime — parse from string
+dt = datetime.strptime(&quot;2024-01-15&quot;, &quot;%Y-%m-%d&quot;)
+dt = datetime.strptime(&quot;15/01/2024 10:30&quot;, &quot;%d/%m/%Y %H:%M&quot;)
+
+# ISO format
+dt = datetime.fromisoformat(&quot;2024-01-15T10:30:00&quot;)
+</code></pre>
+<h2>Time Differences (timedelta)</h2>
+<pre><code class="language-python">from datetime import datetime, timedelta
+
+now = datetime.now()
+
+# Add/subtract time
+tomorrow = now + timedelta(days=1)
+last_week = now - timedelta(weeks=1)
+two_hours_later = now + timedelta(hours=2)
+
+# Difference between dates
+birthday = datetime(1990, 6, 15)
+age = now - birthday
+print(age.days)  # Number of days since birthday
+
+# Create timedelta
+delta = timedelta(days=5, hours=3, minutes=30)
+print(delta.total_seconds())  # Total seconds
+</code></pre>
+<h2>Format Codes</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%Y</code></td>
+<td>Year (4 digits)</td>
+<td>2024</td>
+</tr>
+<tr>
+<td><code>%m</code></td>
+<td>Month (01-12)</td>
+<td>01</td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>Day (01-31)</td>
+<td>15</td>
+</tr>
+<tr>
+<td><code>%H</code></td>
+<td>Hour 24h (00-23)</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>%M</code></td>
+<td>Minute (00-59)</td>
+<td>30</td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>Second (00-59)</td>
+<td>45</td>
+</tr>
+<tr>
+<td><code>%A</code></td>
+<td>Weekday name</td>
+<td>Monday</td>
+</tr>
+<tr>
+<td><code>%B</code></td>
+<td>Month name</td>
+<td>January</td>
+</tr>
+<tr>
+<td><code>%I</code></td>
+<td>Hour 12h (01-12)</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>AM/PM</td>
+<td>AM</td>
+</tr>
+</tbody>
+</table>
+<h2>Common Pitfalls</h2>
+<ul>
+<li><strong>Timezone-naive vs aware</strong> — <code>datetime.now()</code> is naive (no timezone info)</li>
+<li><strong>Month is 1-indexed</strong> — January = 1, not 0</li>
+<li><strong><code>strptime</code> is slow</strong> — for bulk parsing consider <code>dateutil.parser</code></li>
+<li><strong>Mutable dates</strong> — <code>date</code> and <code>datetime</code> are immutable, you must create new objects</li>
+</ul>
+<h2>Tip</h2>
+<blockquote>
+<p>For serious timezone handling, use <code>zoneinfo</code> (Python 3.9+) or the <code>pytz</code> library.</p>
+</blockquote>
+<h2>Official Documentation</h2>
+<p><a href="https://docs.python.org/3/library/datetime.html">datetime — Basic date and time types</a></p>
+<h2>API Reference</h2>
+<h3>Classes</h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datetime.date(year, month, day)</code></td>
+<td>An idealized naive date.</td>
+</tr>
+<tr>
+<td><code>datetime.time(hour, min, sec, microsec, tzinfo)</code></td>
+<td>An idealized time.</td>
+</tr>
+<tr>
+<td><code>datetime.datetime(year, month, day, hour, ...)</code></td>
+<td>A combination of a date and a time.</td>
+</tr>
+<tr>
+<td><code>datetime.timedelta(days, seconds, microseconds)</code></td>
+<td>A duration expressing the difference between two date/times.</td>
+</tr>
+<tr>
+<td><code>datetime.timezone(offset, name=None)</code></td>
+<td>A class that implements the <code>tzinfo</code> abstract base class.</td>
+</tr>
+</tbody>
+</table>
+<h3>Important datetime/date Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datetime.now(tz=None)</code></td>
+<td>Return the current local date and time.</td>
+</tr>
+<tr>
+<td><code>datetime.utcnow()</code></td>
+<td>Return the current UTC date and time (deprecated in 3.12, use <code>now(UTC)</code>).</td>
+</tr>
+<tr>
+<td><code>date.today()</code></td>
+<td>Return the current local date.</td>
+</tr>
+<tr>
+<td><code>obj.strftime(format)</code></td>
+<td>Return a string representing the date/time.</td>
+</tr>
+<tr>
+<td><code>datetime.strptime(date_string, format)</code></td>
+<td>Return a datetime corresponding to date_string.</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Complete Python documentation portal</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/stdlib/">Standard Library</a></li>
+        <li><a href="/frameworks/">Frameworks</a></li>
+        <li><a href="/sandbox/">Code Sandbox</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contribute</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/about/#contributing">Contribution Guide</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/about/#license">License</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>

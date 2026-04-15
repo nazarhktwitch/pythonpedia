@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Глубокое погружение в модуль time: таймстемпы, struct_time, парсинг дат, таймеры производительности и работа с системным временем.">
+  <title>Модуль time — Время и даты | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Модуль time — Время и даты | Pythonpedia">
+  <meta property="og:description" content="Глубокое погружение в модуль time: таймстемпы, struct_time, парсинг дат, таймеры производительности и работа с системным временем.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia/ru/stdlib/time/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Модуль time — Время и даты | Pythonpedia">
+  <meta name="twitter:description" content="Глубокое погружение в модуль time: таймстемпы, struct_time, парсинг дат, таймеры производительности и работа с системным временем.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="ru">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/ru/" class="sidebar-link ">Главная</a></li>
+      <li><a href="/ru/compare/" class="sidebar-link ">Сравнение</a></li>
+      <li><a href="/ru/practices/" class="sidebar-link ">Лучшие практики</a></li>
+      <li><a href="/ru/standards/" class="sidebar-link ">Стандарты кода</a></li>
+      <li><a href="/ru/sandbox/" class="sidebar-link ">Песочница</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Стандартная библиотека</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>Система и файлы</strong>
+          <a href="/ru/stdlib/os/">os</a>
+          <a href="/ru/stdlib/sys/">sys</a>
+          <a href="/ru/stdlib/subprocess/">subprocess</a>
+          <a href="/ru/stdlib/pathlib/">pathlib</a>
+          <a href="/ru/stdlib/shutil/">shutil</a>
+          <a href="/ru/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Сеть и Web</strong>
+          <a href="/ru/stdlib/requests/">requests (External)</a>
+          <a href="/ru/stdlib/urllib/">urllib</a>
+          <a href="/ru/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Данные и форматы</strong>
+          <a href="/ru/stdlib/json/">json</a>
+          <a href="/ru/stdlib/csv/">csv</a>
+          <a href="/ru/stdlib/sqlite3/">sqlite3</a>
+          <a href="/ru/stdlib/pickle/">pickle</a>
+          <a href="/ru/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Математика и время</strong>
+          <a href="/ru/stdlib/datetime/">datetime</a>
+          <a href="/ru/stdlib/time/">time</a>
+          <a href="/ru/stdlib/calendar/">calendar</a>
+          <a href="/ru/stdlib/math/">math</a>
+          <a href="/ru/stdlib/random/">random</a>
+          <a href="/ru/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Структуры и алгоритмы</strong>
+          <a href="/ru/stdlib/collections/">collections</a>
+          <a href="/ru/stdlib/itertools/">itertools</a>
+          <a href="/ru/stdlib/copy/">copy</a>
+          <a href="/ru/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Безопасность</strong>
+          <a href="/ru/stdlib/hashlib/">hashlib</a>
+          <a href="/ru/stdlib/secrets/">secrets</a>
+          <a href="/ru/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Архитектура и Дебаг</strong>
+          <a href="/ru/stdlib/dataclasses/">dataclasses</a>
+          <a href="/ru/stdlib/typing/">typing</a>
+          <a href="/ru/stdlib/functools/">functools</a>
+          <a href="/ru/stdlib/logging/">logging</a>
+          <a href="/ru/stdlib/traceback/">traceback</a>
+          <a href="/ru/stdlib/inspect/">inspect</a>
+          <a href="/ru/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Конкурентность</strong>
+          <a href="/ru/stdlib/asyncio/">asyncio</a>
+          <a href="/ru/stdlib/threading/">threading</a>
+          <a href="/ru/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Текст и архивы</strong>
+          <a href="/ru/stdlib/re/">re</a>
+          <a href="/ru/stdlib/string/">string</a>
+          <a href="/ru/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Фреймворки</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/ru/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/ru/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/ru/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/ru/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/ru/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/ru/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/ru/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/ru/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/ru/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Версии Python</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/ru/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/ru/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/ru/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/ru/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/ru/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/ru/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/ru/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/ru/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/ru/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/ru/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/ru/stdlib/" role="menuitem" aria-current="page">
+            Библиотека
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/frameworks/" role="menuitem" >
+            Фреймворки
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/compare/" role="menuitem" >
+            Сравнение
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/versions/" role="menuitem" >
+            Версии
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/practices/" role="menuitem" >
+            Практики
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/sandbox/" role="menuitem" >
+            Песочница
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link " aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link active" aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Поиск..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>time — Доступ ко времени и конвертация</h1>
+<p>Модуль <code>time</code> предоставляет широкий спектр функций для работы со временем на уровне операционной системы. Хотя в современной разработке для оперирования датами предпочтителен объектно-ориентированный модуль <code>datetime</code>, модуль <code>time</code> остается фундаментальным для низкоуровневых операций, измерения производительности и системных пауз.</p>
+<pre><code class="language-python">import time
+</code></pre>
+<h2>Терминология и ключевые концепции</h2>
+<p>Для работы с модулем <code>time</code> нужно понимать базовые понятия:</p>
+<ol>
+<li><strong>Эпоха (The Epoch)</strong>: Точка отсчета времени для операционной системы. В Unix и Windows эпоха начинается <strong>1 января 1970 года, 00:00:00 UTC</strong>.</li>
+<li><strong>Unix таймстемп (Timestamp)</strong>: Представление времени в виде числа с плавающей точкой, равного количеству секунд, прошедших с начала эпохи.</li>
+<li><strong>UTC (Всемирное координированное время)</strong>: Единый мировой стандарт времени, на котором базируются все часовые пояса.</li>
+<li><strong>Локальное время (Local Time)</strong>: Время с учетом вашего текущего часового пояса.</li>
+<li><strong>DST (Летнее время)</strong>: Смещение часового пояса на один час в летний период.</li>
+</ol>
+<h2>Класс <code>struct_time</code></h2>
+<p>Многие функции в этом модуле возвращают или принимают объект <code>time.struct_time</code>. Это кортеж (именованный) из 9 элементов, который делает легким доступ к конкретным частям времени (год, месяц, минута).</p>
+<table>
+<thead>
+<tr>
+<th>Индекс</th>
+<th>Атрибут</th>
+<th>Значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>tm_year</code></td>
+<td>например, 2024</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>tm_mon</code></td>
+<td>1 до 12</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>tm_mday</code></td>
+<td>1 до 31 (день месяца)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>tm_hour</code></td>
+<td>0 до 23 (часы)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>tm_min</code></td>
+<td>0 до 59 (минуты)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>tm_sec</code></td>
+<td>0 до 61 (секунды, 60-61 для високосных секунд)</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>tm_wday</code></td>
+<td>0 до 6 (день недели, 0 - понедельник)</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>tm_yday</code></td>
+<td>1 до 366 (день в году)</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>tm_isdst</code></td>
+<td>-1, 0, 1 (флаг летнего времени)</td>
+</tr>
+</tbody>
+</table>
+<p>Пример использования:</p>
+<pre><code class="language-python">import time
+t = time.localtime()
+print(f&quot;Год: {t.tm_year}, Месяц: {t.tm_mon}, День: {t.tm_mday}&quot;)
+print(f&quot;День недели: {t.tm_wday} (где 0 - ПН)&quot;)
+</code></pre>
+<h2>Получение текущего времени</h2>
+<h3>1. <code>time.time()</code> и <code>time.time_ns()</code></h3>
+<p>Возвращает текущее системное время в секундах с начала &quot;эпохи&quot;.</p>
+<pre><code class="language-python">import time
+
+timestamp = time.time()
+print(f&quot;Секунд с эпохи Unix: {timestamp}&quot;) # например, 1705324500.123
+
+# Начиная с Python 3.7 добавлена функция time_ns()
+# Она возвращает наносекунды целым числом, избегая потери точности float
+nanoseconds = time.time_ns()
+print(f&quot;Наносекунды: {nanoseconds}&quot;)
+</code></pre>
+<h3>2. <code>time.localtime([secs])</code> и <code>time.gmtime([secs])</code></h3>
+<p>Обе функции конвертируют таймстемп в объект <code>struct_time</code>.</p>
+<ul>
+<li><code>localtime()</code> конвертирует с учетом вашего системного часового пояса.</li>
+<li><code>gmtime()</code> конвертирует в мировое время UTC.</li>
+</ul>
+<p>Если не передать аргумент <code>secs</code>, они возьмут текущее время (эквивалент <code>time.time()</code>).</p>
+<pre><code class="language-python">import time
+
+local = time.localtime()
+print(f&quot;Локальное время: {local.tm_hour}:{local.tm_min}&quot;)
+
+utc = time.gmtime()
+print(f&quot;UTC время: {utc.tm_hour}:{utc.tm_min}&quot;)
+
+# Конвертация конкретной отметки
+t = time.localtime(1000000000) # 9 Сентября 2001
+</code></pre>
+<h2>Управление выполнением: <code>time.sleep()</code></h2>
+<p>Функция <code>time.sleep(secs)</code> блокирует текущий поток выполнения на заданное количество секунд. Поддерживаются дробные числа для миллисекундных пауз.</p>
+<pre><code class="language-python">import time
+
+print(&quot;Загрузка...&quot;)
+time.sleep(2.5)  # Программа &quot;засыпает&quot; на 2.5 секунды
+print(&quot;Готово!&quot;)
+</code></pre>
+<p><em>Примечание: ОС не является системой реального времени, поэтому пауза может продлиться чуть дольше запрошенной, если процессор занят другими задачами.</em></p>
+<h2>Измерение производительности кода</h2>
+<p>При бенчмаркинге (измерении скорости работы кода) <strong>категорически не рекомендуется использовать <code>time.time()</code></strong>. Системное время может быть синхронизировано через интернет по протоколу NTP прямо во время замера, из-за чего время может &quot;прыгнуть&quot; назад или вперед. Используйте специальные высокоточные таймеры:</p>
+<h3>1. <code>time.perf_counter()</code> (Рекомендуемый подход)</h3>
+<p>Счетчик с самым высоким разрешением, доступным ОС, предназначенный для измерения коротких промежутков. Учитывает время, которое программа &quot;проспала&quot; (<code>sleep</code>).</p>
+<pre><code class="language-python">import time
+
+start_time = time.perf_counter()
+
+# Имитация тяжелой операции
+total = sum(i * i for i in range(10_000_000))
+
+end_time = time.perf_counter()
+print(f&quot;Вычисление заняло {end_time - start_time:.4f} секунд&quot;)
+</code></pre>
+<h3>2. <code>time.process_time()</code></h3>
+<p>Измеряет чистое процессорное время, потраченное текущим процессом (сумма system и user time). Он <strong>не включает</strong> в себя время, проведенное в состояниях ожидания или <code>sleep</code>. Оптимален для измерения чистой ресурсоемкости алгоритма.</p>
+<pre><code class="language-python">import time
+
+start = time.process_time()
+time.sleep(2) # Время простоя не будет учтено!
+end = time.process_time()
+
+print(f&quot;CPU время: {end - start:.4f} секунд&quot;) # Близко к 0.0000
+</code></pre>
+<h3>3. <code>time.monotonic()</code></h3>
+<p>&quot;Монотонные&quot; часы, которые гарантированно никогда не идут в обратную сторону. Идеально подходят для вычисления интервалов и проверки таймаутов, так как не подвержены корректировке системного времени.</p>
+<h2>Форматирование и парсинг времени</h2>
+<h3>1. <code>strftime(format, t)</code></h3>
+<p>Конвертирует объект <code>struct_time</code> <code>t</code> в строку, форматированную согласно правилам в строке <code>format</code>. <em>(strftime = String Format Time)</em></p>
+<pre><code class="language-python">import time
+
+t = time.localtime()
+
+# &quot;2024-01-15 14:30:00&quot;
+print(time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, t))
+
+# Локализованный вывод: &quot;Понедельник, 15 Января 2024&quot;
+print(time.strftime(&quot;%A, %d %B %Y&quot;, t))
+</code></pre>
+<p><strong>Ключевые директивы:</strong></p>
+<ul>
+<li><code>%Y</code>: Год с веком (2024)</li>
+<li><code>%y</code>: Год без века (00..99)</li>
+<li><code>%m</code>: Месяц (01..12)</li>
+<li><code>%B</code>: Название месяца полностью (локализовано)</li>
+<li><code>%d</code>: День месяца (01..31)</li>
+<li><code>%H</code>: Часы в 24-часовом формате (00..23)</li>
+<li><code>%M</code>: Минуты (00..59)</li>
+<li><code>%S</code>: Секунды (00..59)</li>
+</ul>
+<h3>2. <code>strptime(string, format)</code></h3>
+<p>Обратная операция. Конвертирует строку со временем обратно в объект <code>struct_time</code> на основе переданного формата. <em>(strptime = String Parse Time)</em></p>
+<pre><code class="language-python">import time
+
+date_string = &quot;21 Июнь, 2018&quot; 
+# (должно соответствовать системной локали, если используются названия)
+try:
+    result = time.strptime(&quot;21 06 2018&quot;, &quot;%d %m %Y&quot;)
+    print(result.tm_year) # 2018
+except ValueError as e:
+    print(f&quot;Ошибка парсинга: {e}&quot;)
+</code></pre>
+<h3>3. От struct к таймстемпу: <code>time.mktime(t)</code></h3>
+<p>Принимает <code>struct_time</code> (в локальном часовом поясе) и конвертирует его в float таймстемп.</p>
+<pre><code class="language-python">import time
+
+t = time.strptime(&quot;2024-01-01 00:00:00&quot;, &quot;%Y-%m-%d %H:%M:%S&quot;)
+timestamp = time.mktime(t)
+print(timestamp) # 1704067200.0
+</code></pre>
+<h2>Работа с часовыми поясами (<code>time.tzset()</code>)</h2>
+<p>В Unix-системах (Linux/macOS) можно динамически менять часовой пояс в рамках запущенного процесса, используя переменную окружения <code>TZ</code> в комбинации с функцией <code>time.tzset()</code>.</p>
+<pre><code class="language-python">import os
+import time
+
+# Запоминаем текущее время
+print(&quot;Локально:&quot;, time.strftime('%X %x %Z'))
+
+# Переключаемся на Нью-Йорк (Синтаксис зависит от ОС, типично для Linux/macOS)
+os.environ['TZ'] = 'America/New_York'
+try:
+    time.tzset()
+    print(&quot;В Нью-Йорке:&quot;, time.strftime('%X %x %Z'))
+except AttributeError:
+    print(&quot;Функция time.tzset() недоступна на вашей платформе (например, Windows)&quot;)
+</code></pre>
+<h2>Сводная таблица конвертаций</h2>
+<p>Шпаргалка для преобразований времени:</p>
+<ul>
+<li>Таймстемп → Локальный Struct: <code>time.localtime(ts)</code></li>
+<li>Таймстемп → UTC Struct: <code>time.gmtime(ts)</code></li>
+<li>Локальный Struct → Таймстемп: <code>time.mktime(t)</code></li>
+<li>UTC Struct → Таймстемп: Используйте функцию <code>calendar.timegm(t)</code> (из модуля <code>calendar</code>)</li>
+<li>Struct → Строка: <code>time.strftime(fmt, t)</code></li>
+<li>Строка → Struct: <code>time.strptime(string, fmt)</code></li>
+</ul>
+<h2>Официальная документация</h2>
+<p><a href="https://docs.python.org/3/library/time.html">time — Time access and conversions</a></p>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Полный портал документации Python</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ресурсы</h4>
+      <ul>
+        <li><a href="/ru/about/">О проекте</a></li>
+        <li><a href="/ru/stdlib/">Стандартная библиотека</a></li>
+        <li><a href="/ru/frameworks/">Фреймворки</a></li>
+        <li><a href="/ru/sandbox/">Песочница</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Участие</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/ru/about/#contributing">Руководство</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Правовая информация</h4>
+      <ul>
+        <li><a href="/ru/about/#license">Лицензия</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>

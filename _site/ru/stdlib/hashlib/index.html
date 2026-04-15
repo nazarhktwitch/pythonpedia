@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Документация hashlib: SHA-256, MD5, хеширование паролей и файлов">
+  <title>Модуль hashlib — Хеширование | Pythonpedia</title>
+  
+  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Модуль hashlib — Хеширование | Pythonpedia">
+  <meta property="og:description" content="Документация hashlib: SHA-256, MD5, хеширование паролей и файлов">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazarhk.github.io/pythonpedia/ru/stdlib/hashlib/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Модуль hashlib — Хеширование | Pythonpedia">
+  <meta name="twitter:description" content="Документация hashlib: SHA-256, MD5, хеширование паролей и файлов">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body data-theme="light" data-language="ru">
+  <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
+  <div class="sidebar-header">
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <span class="logo-text">Pythonpedia</span>
+    </a>
+    <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="sidebar-content">
+    
+    
+
+    <!-- Core Sections -->
+    <ul class="sidebar-menu">
+      <li><a href="/ru/" class="sidebar-link ">Главная</a></li>
+      <li><a href="/ru/compare/" class="sidebar-link ">Сравнение</a></li>
+      <li><a href="/ru/practices/" class="sidebar-link ">Лучшие практики</a></li>
+      <li><a href="/ru/standards/" class="sidebar-link ">Стандарты кода</a></li>
+      <li><a href="/ru/sandbox/" class="sidebar-link ">Песочница</a></li>
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <!-- Standard Library Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Стандартная библиотека</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <div class="sidebar-group">
+          <strong>Система и файлы</strong>
+          <a href="/ru/stdlib/os/">os</a>
+          <a href="/ru/stdlib/sys/">sys</a>
+          <a href="/ru/stdlib/subprocess/">subprocess</a>
+          <a href="/ru/stdlib/pathlib/">pathlib</a>
+          <a href="/ru/stdlib/shutil/">shutil</a>
+          <a href="/ru/stdlib/tempfile/">tempfile</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Сеть и Web</strong>
+          <a href="/ru/stdlib/requests/">requests (External)</a>
+          <a href="/ru/stdlib/urllib/">urllib</a>
+          <a href="/ru/stdlib/socket/">socket</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Данные и форматы</strong>
+          <a href="/ru/stdlib/json/">json</a>
+          <a href="/ru/stdlib/csv/">csv</a>
+          <a href="/ru/stdlib/sqlite3/">sqlite3</a>
+          <a href="/ru/stdlib/pickle/">pickle</a>
+          <a href="/ru/stdlib/base64/">base64</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Математика и время</strong>
+          <a href="/ru/stdlib/datetime/">datetime</a>
+          <a href="/ru/stdlib/time/">time</a>
+          <a href="/ru/stdlib/calendar/">calendar</a>
+          <a href="/ru/stdlib/math/">math</a>
+          <a href="/ru/stdlib/random/">random</a>
+          <a href="/ru/stdlib/statistics/">statistics</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Структуры и алгоритмы</strong>
+          <a href="/ru/stdlib/collections/">collections</a>
+          <a href="/ru/stdlib/itertools/">itertools</a>
+          <a href="/ru/stdlib/copy/">copy</a>
+          <a href="/ru/stdlib/enum/">enum</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Безопасность</strong>
+          <a href="/ru/stdlib/hashlib/">hashlib</a>
+          <a href="/ru/stdlib/secrets/">secrets</a>
+          <a href="/ru/stdlib/uuid/">uuid</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Архитектура и Дебаг</strong>
+          <a href="/ru/stdlib/dataclasses/">dataclasses</a>
+          <a href="/ru/stdlib/typing/">typing</a>
+          <a href="/ru/stdlib/functools/">functools</a>
+          <a href="/ru/stdlib/logging/">logging</a>
+          <a href="/ru/stdlib/traceback/">traceback</a>
+          <a href="/ru/stdlib/inspect/">inspect</a>
+          <a href="/ru/stdlib/unittest/">unittest</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Конкурентность</strong>
+          <a href="/ru/stdlib/asyncio/">asyncio</a>
+          <a href="/ru/stdlib/threading/">threading</a>
+          <a href="/ru/stdlib/multiprocessing/">multiprocessing</a>
+        </div>
+        <div class="sidebar-group">
+          <strong>Текст и архивы</strong>
+          <a href="/ru/stdlib/re/">re</a>
+          <a href="/ru/stdlib/string/">string</a>
+          <a href="/ru/stdlib/zipfile/">zipfile</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frameworks Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Фреймворки</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/frameworks/django/" class="sidebar-link">Django</a>
+        <a href="/ru/frameworks/flask/" class="sidebar-link">Flask</a>
+        <a href="/ru/frameworks/fastapi/" class="sidebar-link">FastAPI</a>
+        <a href="/ru/frameworks/pyramid/" class="sidebar-link">Pyramid</a>
+        <a href="/ru/frameworks/tornado/" class="sidebar-link">Tornado</a>
+        <a href="/ru/frameworks/sanic/" class="sidebar-link">Sanic</a>
+        <a href="/ru/frameworks/quart/" class="sidebar-link">Quart</a>
+        <a href="/ru/frameworks/bottle/" class="sidebar-link">Bottle</a>
+        <a href="/ru/frameworks/cherrypy/" class="sidebar-link">CherryPy</a>
+        <a href="/ru/frameworks/web2py/" class="sidebar-link">web2py</a>
+      </div>
+    </div>
+
+    <!-- Versions Accordion -->
+    <div class="accordion">
+      <button class="accordion-header" aria-expanded="false">
+        <span>Версии Python</span>
+        <span class="accordion-icon">▼</span>
+      </button>
+      <div class="accordion-content">
+        <a href="/ru/versions/3.15/" class="sidebar-link">Python 3.15 (2026)</a>
+        <a href="/ru/versions/3.14/" class="sidebar-link">Python 3.14 (2025)</a>
+        <a href="/ru/versions/3.13/" class="sidebar-link">Python 3.13 (2024)</a>
+        <a href="/ru/versions/3.12/" class="sidebar-link">Python 3.12 (2023)</a>
+        <a href="/ru/versions/3.11/" class="sidebar-link">Python 3.11 (2022)</a>
+        <a href="/ru/versions/3.10/" class="sidebar-link">Python 3.10 (2021)</a>
+        <a href="/ru/versions/3.9/" class="sidebar-link">Python 3.9 (2020)</a>
+        <a href="/ru/versions/3.8/" class="sidebar-link">Python 3.8 (2019)</a>
+        <a href="/ru/versions/3.7/" class="sidebar-link">Python 3.7 (2018)</a>
+        <a href="/ru/versions/3.6/" class="sidebar-link">Python 3.6 (2016)</a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+  <header role="banner">
+  <nav aria-label="Main navigation">
+    <div class="header-container">
+      
+      
+      
+      <div class="header-left" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false" style="background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 0.5rem;">
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+          <span style="display: block; width: 24px; height: 2px; background-color: var(--text-primary);"></span>
+        </button>
+
+        <a href="/ru/" class="logo" aria-label="Pythonpedia Home" style="display: flex; align-items: center; gap: 8px;">
+          <img class="logo-icon" src="/assets/images/python-logo.png" alt="Python logo" width="28" height="28">
+          <span class="logo-text">Pythonpedia</span>
+        </a>
+      </div>
+
+      <ul class="nav-menu" role="menubar">
+        <li role="none">
+          <a href="/ru/stdlib/" role="menuitem" aria-current="page">
+            Библиотека
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/frameworks/" role="menuitem" >
+            Фреймворки
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/compare/" role="menuitem" >
+            Сравнение
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/versions/" role="menuitem" >
+            Версии
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/practices/" role="menuitem" >
+            Практики
+          </a>
+        </li>
+        <li role="none">
+          <a href="/ru/sandbox/" role="menuitem" >
+            Песочница
+          </a>
+        </li>
+      </ul>
+      
+      <div class="header-actions">
+        <div class="language-switcher">
+          <a href="/" class="lang-link " aria-label="English">EN</a>
+          <span class="lang-separator">|</span>
+          <a href="/ru/" class="lang-link active" aria-label="Русский">RU</a>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light theme">
+          <span class="theme-icon-light"><i class="fas fa-sun"></i></span>
+          <span class="theme-icon-dark"><i class="fas fa-moon"></i></span>
+        </button>
+
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Поиск..." aria-label="Search Pythonpedia" style="padding-right: 15px;">
+          <div id="search-results" class="search-results" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <main id="main-content">
+    <h1>hashlib — Безопасные хеши и дайджесты сообщений</h1>
+<p>Модуль реализует общий интерфейс для множества алгоритмов хеширования (SHA1, SHA256, MD5 и т.д.).</p>
+<pre><code class="language-python">import hashlib
+</code></pre>
+<h2>Базовое хеширование</h2>
+<p>Данные для хеширования должны передаваться в виде <strong>байт</strong> (<code>bytes</code>), а не обычных строк.</p>
+<pre><code class="language-python">import hashlib
+
+# 1. Выбор алгоритма
+m = hashlib.sha256()
+
+# 2. Добавление данных
+m.update(b&quot;Hello&quot;)
+m.update(&quot; World&quot;.encode('utf-8'))
+
+# 3. Результат
+print(m.hexdigest()) # Шестнадцатеричная строка (самый частый вариант)
+</code></pre>
+<p>Компактная запись:</p>
+<pre><code class="language-python">hash_str = hashlib.sha256(&quot;Текстовые данные&quot;.encode('utf-8')).hexdigest()
+</code></pre>
+<h2>Хеширование файлов (без перегрузки памяти)</h2>
+<p>Для больших файлов нужно обновлять хеш порциями (чанками):</p>
+<pre><code class="language-python">import hashlib
+
+def get_file_hash(filename):
+    h = hashlib.sha256()
+    with open(filename, 'rb') as file:
+        chunk = 0
+        while chunk != b'':
+            # Читаем по 4 КБ
+            chunk = file.read(4096)
+            h.update(chunk)
+    return h.hexdigest()
+
+print(get_file_hash(&quot;large_file.zip&quot;))
+</code></pre>
+<h2>Хеширование паролей</h2>
+<p>Обычного SHA-256 недостаточно для паролей. Используйте генерацию ключей (PBKDF2):</p>
+<pre><code class="language-python">import hashlib
+import os
+
+password = b&quot;my_password123&quot;
+salt = os.urandom(32) # Уникальная соль для каждого пользователя
+
+# PBKDF2 с SHA256 и 100 000 итераций
+hashed_key = hashlib.pbkdf2_hmac('sha256', password, salt, 100000)
+
+print(hashed_key.hex())
+</code></pre>
+<blockquote>
+<p><strong>Примечание:</strong> Для промышленных решений управления паролями лучше использовать сторонние пакеты, например <code>bcrypt</code> или <code>argon2-cffi</code>, либо стандартный <code>secrets</code>.</p>
+</blockquote>
+<h2>Официальная документация</h2>
+<p><a href="https://docs.python.org/3/library/hashlib.html">hashlib — Secure hashes and message digests</a></p>
+<h2>Полный справочник API (API Reference)</h2>
+<h3>Алгоритмы хеширования</h3>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hashlib.sha256([data])</code></td>
+<td>Создает объект алгоритма SHA-256 (самый рекомендуемый стандарт). Если передана строка в виде <code>bytes</code>, инициализирует ей.</td>
+</tr>
+<tr>
+<td><code>hashlib.md5([data])</code></td>
+<td>Создает объект устаревшего MD5-алгоритма.</td>
+</tr>
+<tr>
+<td><code>hashlib.new(name)</code></td>
+<td>Общий конструктор. Принимает имя алгоритма строкой, например <code>'sha1'</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Методы объекта хеша</h3>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hash.update(data)</code></td>
+<td>Добавляет порцию новых байтовых данных к хешу (меняет внутреннее состояние).</td>
+</tr>
+<tr>
+<td><code>hash.digest()</code></td>
+<td>Возвращает готовый хеш в формате объекта <code>bytes</code>.</td>
+</tr>
+<tr>
+<td><code>hash.hexdigest()</code></td>
+<td>Возвращает готовый хеш в формате шестнадцатеричной строки <code>str</code> (состоит только из английских букв от a до f и цифр от 0 до 9).</td>
+</tr>
+</tbody>
+</table>
+<h3>Ключи и защита паролей</h3>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hashlib.pbkdf2_hmac(name, pwd, salt, iter)</code></td>
+<td>Мощная функция вычисления стойкого хеша для пароля на основе алгоритма вывода ключей PBKDF2.</td>
+</tr>
+</tbody>
+</table>
+
+  </main>
+  
+  <footer role="contentinfo">
+  
+  
+  
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Pythonpedia</h3>
+      <p>Полный портал документации Python</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Ресурсы</h4>
+      <ul>
+        <li><a href="/ru/about/">О проекте</a></li>
+        <li><a href="/ru/stdlib/">Стандартная библиотека</a></li>
+        <li><a href="/ru/frameworks/">Фреймворки</a></li>
+        <li><a href="/ru/sandbox/">Песочница</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Участие</h4>
+      <ul>
+        <li><a href="https://github.com/nazarhk/pythonpedia" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="/ru/about/#contributing">Руководство</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Правовая информация</h4>
+      <ul>
+        <li><a href="/ru/about/#license">Лицензия</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 NazarHK. Licensed under <a href="https://mit-license.org/" target="_blank" rel="noopener">MIT License</a>.</p>
+  </div>
+</footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js" defer></script>
+  <script>
+    window.synonyms = {"append":["add","insert","add","insert"],"list":["array","array"],"dictionary":["dict","map","dict","map"],"function":["method","procedure","method","procedure"],"class":["type","type"],"module":["package","library","package","library"],"import":["include","require","include","require"],"string":["text","str","text","str"],"integer":["int","number","int","number"],"boolean":["bool","bool"],"exception":["error","error"],"raise":["throw","throw"],"try":["catch","catch"],"finally":["ensure","ensure"]};
+  </script>
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/mobile-menu.js" defer></script>
+  <script src="/assets/js/search.js" defer></script>
+  <script src="/assets/js/toc.js" defer></script>
+  <script src="/assets/js/code-highlight.js" defer></script>
+  <script src="/assets/js/sandbox.js" defer></script>
+  <script src="/assets/js/sidebar.js" defer></script>
+  
+</body>
+</html>
