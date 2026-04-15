@@ -6,7 +6,8 @@
   <meta name="description" content="{{ description or site.description }}">
   <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
   
-  <link rel="icon" type="image/png" href="/assets/images/python-logo.png">
+  {% set base = site.baseUrl | default("") %}
+  <link rel="icon" type="image/png" href="{{ base }}/assets/images/python-logo.png">
   
   <!-- OpenGraph -->
   <meta property="og:title" content="{% if title %}{{ title }} | {% endif %}{{ site.title }}">
@@ -22,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="stylesheet" href="/assets/css/print.css" media="print">
+  <link rel="stylesheet" href="{{ base }}/assets/css/main.css">
+  <link rel="stylesheet" href="{{ base }}/assets/css/print.css" media="print">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   {% if stylesheet %}<link rel="stylesheet" href="{{ stylesheet }}">{% endif %}
@@ -45,13 +46,16 @@
   <script>
     window.synonyms = {{ synonyms | dump | safe }};
   </script>
-  <script src="/assets/js/theme.js" defer></script>
-  <script src="/assets/js/mobile-menu.js" defer></script>
-  <script src="/assets/js/search.js" defer></script>
-  <script src="/assets/js/toc.js" defer></script>
-  <script src="/assets/js/code-highlight.js" defer></script>
-  <script src="/assets/js/sandbox.js" defer></script>
-  <script src="/assets/js/sidebar.js" defer></script>
+  <script>
+    window.BASE_URL = "{{ base }}";
+  </script>
+  <script src="{{ base }}/assets/js/theme.js" defer></script>
+  <script src="{{ base }}/assets/js/mobile-menu.js" defer></script>
+  <script src="{{ base }}/assets/js/search.js" defer></script>
+  <script src="{{ base }}/assets/js/toc.js" defer></script>
+  <script src="{{ base }}/assets/js/code-highlight.js" defer></script>
+  <script src="{{ base }}/assets/js/sandbox.js" defer></script>
+  <script src="{{ base }}/assets/js/sidebar.js" defer></script>
   {% if script %}<script src="{{ script }}" defer></script>{% endif %}
 </body>
 </html>

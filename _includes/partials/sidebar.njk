@@ -1,9 +1,9 @@
 <div id="global-sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
 
 <aside id="global-sidebar" class="global-sidebar" aria-label="Global Navigation">
-  <div class="sidebar-header">
+    <div class="sidebar-header">
     <a href="{{ langPrefix }}/" class="logo" style="display: flex; align-items: center; gap: 8px;">
-      <img src="/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
+      <img src="{{ site.baseUrl | default('') }}/assets/images/python-logo.png" alt="Python logo" width="24" height="24">
       <span class="logo-text">{{ site.title }}</span>
     </a>
     <button id="close-sidebar-btn" class="close-btn" aria-label="Close menu">✕</button>

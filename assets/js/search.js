@@ -13,8 +13,10 @@
     const htmlLang = document.documentElement.lang;
     if (htmlLang && htmlLang !== "en") return htmlLang;
 
-    // Fallback: detect from URL path
-    if (window.location.pathname.startsWith("/ru/") || window.location.pathname === "/ru") {
+    // Fallback: detect from URL path (respect repo base path)
+    const base = window.BASE_URL || "";
+    const pathAfterBase = window.location.pathname.startsWith(base) ? window.location.pathname.slice(base.length) : window.location.pathname;
+    if (pathAfterBase.startsWith("/ru/") || pathAfterBase === "/ru") {
       return "ru";
     }
     return "en";
@@ -27,7 +29,8 @@
   // Load search index
   async function loadSearchIndex() {
     try {
-      const response = await fetch(`/search-index-${currentLang}.json`);
+  const base = window.BASE_URL || "";
+  const response = await fetch(`${base}/search-index-${currentLang}.json`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       searchIndex = lunr.Index.load(data.index);
@@ -38,7 +41,7 @@
       // Try fallback to English
       if (currentLang !== "en") {
         try {
-          const response = await fetch("/search-index-en.json");
+          const response = await fetch(`${base}/search-index-en.json`);
           if (response.ok) {
             const data = await response.json();
             searchIndex = lunr.Index.load(data.index);
@@ -110,9 +113,10 @@
           .trim();
         const snippet = cleanContent.substring(0, 150) + "...";
 
+        const base = window.BASE_URL || "";
         html += `
           <li class="search-result-item">
-            <a href="${doc.url}">
+            <a href="${base}${doc.url}">
               <h4>${doc.title}</h4>
               <p>${snippet}</p>
             </a>
