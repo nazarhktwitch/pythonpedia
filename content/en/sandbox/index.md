@@ -15,4 +15,4 @@ print('Try writing some code below and click Run.')">
 
 ---
 
-Looking for examples? Browse our [standard library references](/stdlib/) and use the "Try it" buttons on code snippets!
+Looking for examples? Browse our [standard library references](/stdlib/) and use the "Try it" buttons on code snippets to run them directly in your browser!

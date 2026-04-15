@@ -2,6 +2,8 @@
 
 Python documentation portal including guides for standard library, popular frameworks, best practices, pitfalls, examples, and code standards
 
+*Open Pythonpedia: [https://nazarhktwitch.github.io/pythonpedia/](https://nazarhktwitch.github.io/pythonpedia/)*
+
 ## Development
 
 ### Prerequisites

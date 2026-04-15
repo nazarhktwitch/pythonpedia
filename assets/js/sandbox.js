@@ -3,8 +3,6 @@
   let pyodideLoading = false;
   const sandboxContainers = document.querySelectorAll(".sandbox-container");
 
-  if (sandboxContainers.length === 0) return;
-
   async function initPyodide() {
     if (pyodide) return pyodide;
     if (pyodideLoading) return null; // Avoid multiple parallel loads
@@ -14,7 +12,8 @@
     loadingIndicator.className = "sandbox-loading";
     loadingIndicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initializing Python Runtime...';
 
-    sandboxContainers.forEach(container => {
+    // Get all current and future sandboxes
+    document.querySelectorAll(".sandbox-container").forEach(container => {
       const existing = container.querySelector(".sandbox-loading");
       if (!existing) {
         container.appendChild(loadingIndicator.cloneNode(true));
@@ -40,7 +39,7 @@
       // Warm up
       await pyodide.loadPackage("micropip");
 
-      sandboxContainers.forEach(container => {
+      document.querySelectorAll(".sandbox-container").forEach(container => {
         const loading = container.querySelector(".sandbox-loading");
         if (loading) loading.remove();
         const runBtn = container.querySelector(".sandbox-run");
@@ -51,7 +50,7 @@
       return pyodide;
     } catch (error) {
       console.error("Failed to load Pyodide:", error);
-      sandboxContainers.forEach(container => {
+      document.querySelectorAll(".sandbox-container").forEach(container => {
         const loading = container.querySelector(".sandbox-loading");
         if (loading) {
           loading.textContent = "Error: Could not load Python. Check your internet connection.";
@@ -161,13 +160,18 @@ sys.stderr = StringIO()
     });
   }
 
-  // Initialize sandboxes
-  sandboxContainers.forEach(container => {
-    const code = container.getAttribute("data-code") || "";
-    createSandbox(container, code);
-  });
+  // Initialize sandboxes on page load
+  if (sandboxContainers.length > 0) {
+    sandboxContainers.forEach(container => {
+      const code = container.getAttribute("data-code") || "";
+      createSandbox(container, code);
+    });
+  }
 
-  // Global lazy loader for any buttons with "try-it" class
+  // Expose createSandbox globally so code-highlight.js can use it
+  window.initSandbox = createSandbox;
+
+  // Global lazy loader for any buttons with "sandbox-run" class
   document.addEventListener("click", async function(e) {
     if (e.target.closest(".sandbox-run") && !pyodide) {
       await initPyodide();

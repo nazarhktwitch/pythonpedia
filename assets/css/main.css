@@ -531,10 +531,17 @@ pre {
   position: relative;
 }
 
-.copy-button {
+.code-buttons {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.copy-button,
+.try-button {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-color);
   border-radius: 4px;
@@ -543,11 +550,18 @@ pre {
   cursor: pointer;
   color: var(--text-primary);
   min-height: 32px;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.copy-button:hover {
+.copy-button:hover,
+.try-button:hover {
   background-color: var(--accent-primary);
   color: white;
+}
+
+.try-button i {
+  margin-right: 0.25rem;
 }
 
 /* Sandbox - Modern Dark Editor */
