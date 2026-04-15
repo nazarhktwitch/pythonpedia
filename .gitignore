@@ -1,5 +1,5 @@
-# Build output (commented, site is deployed on Github Pages
-# _site/
+# Build output
+_site/
 
 # Dependencies
 node_modules/
