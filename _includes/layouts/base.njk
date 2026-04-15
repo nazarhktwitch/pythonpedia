@@ -57,5 +57,48 @@
   <script src="{{ base }}/assets/js/sandbox.js" defer></script>
   <script src="{{ base }}/assets/js/sidebar.js" defer></script>
   {% if script %}<script src="{{ script }}" defer></script>{% endif %}
+  <script>
+    (function () {
+      // Runtime fix: when the site is hosted under a repository sub-path (site.baseUrl),
+      // many content files use root-prefixed paths like `/assets/...` or `/ru/...`.
+      // This script rewrites anchors, images, and form actions that start with `/`
+      // to include the configured BASE_URL so links work on GitHub Pages repo subpaths.
+      var base = (window.BASE_URL || "") || "";
+      if (!base) return;
+      // Normalize base: remove trailing slash if present (we expect base like '/pythonpedia')
+      base = base.replace(/\/$/, '');
+
+      function prefixIfRootPath(value) {
+        if (!value) return value;
+        // Leave protocol-relative and absolute origins alone
+        if (value.startsWith('//') || /^[a-zA-Z]+:\/\//.test(value)) return value;
+        // Already prefixed with base
+        if (value.indexOf(base + '/') === 0) return value;
+        // Only transform root-relative paths
+        if (value.charAt(0) === '/') return (base + value).replace(/\/{2,}/g, '/');
+        return value;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          Array.prototype.forEach.call(document.querySelectorAll('a[href^="/"]'), function (a) {
+            var href = a.getAttribute('href');
+            a.setAttribute('href', prefixIfRootPath(href));
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('img[src^="/"]'), function (img) {
+            var src = img.getAttribute('src');
+            img.setAttribute('src', prefixIfRootPath(src));
+          });
+          Array.prototype.forEach.call(document.querySelectorAll('form[action^="/"]'), function (f) {
+            var act = f.getAttribute('action');
+            f.setAttribute('action', prefixIfRootPath(act));
+          });
+        } catch (e) {
+          // Don't let rewriting break the page if something unexpected happens
+          console.warn('Base URL rewriting failed', e);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

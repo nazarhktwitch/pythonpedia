@@ -10,8 +10,9 @@
   </div>
 
   <div class="sidebar-content">
-    {% set langPrefix = "" %}
-    {% if language == "ru" %}{% set langPrefix = "/ru" %}{% endif %}
+  {% set base = site.baseUrl | default('') %}
+  {% set langPrefix = base %}
+  {% if language == "ru" %}{% set langPrefix = base ~ '/ru' %}{% endif %}
 
     <!-- Core Sections -->
     <ul class="sidebar-menu">
