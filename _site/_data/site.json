@@ -1,9 +1,0 @@
-{
-  "title": "Pythonpedia",
-  "description": "Universal portal with the most complete Python documentation including standard library, popular frameworks, best practices, pitfalls, examples, and code standards",
-  "url": "https://nazarhk.github.io/pythonpedia",
-  "author": "NazarHK",
-  "language": "en",
-  "defaultLanguage": "en",
-  "languages": ["en", "ru"]
-}
