@@ -1,5 +1,9 @@
 # Pythonpedia
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Docs](https://img.shields.io/badge/Docs-Wiki-blue?style=for-the-badge)
+![License](https://img.shields.io/github/license/nazarhktwitch/pythonpedia?style=for-the-badge&color=blue)
+
 Python documentation portal including guides for standard library, popular frameworks, best practices, pitfalls, examples, and code standards
 
 *Open Pythonpedia: [https://nazarhktwitch.github.io/pythonpedia/](https://nazarhktwitch.github.io/pythonpedia/)*
